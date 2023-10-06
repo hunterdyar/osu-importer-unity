@@ -92,14 +92,17 @@ namespace HDyar.OSUImporter
 				Array.Copy(data,5,hit.ObjectParams,0,par);
 			}
 
-			var sample = data[^1];
-			if (sample.Contains(':'))
+			var sampleLine = data[^1];
+			if (sampleLine.Contains(':'))
 			{
-				hit.HitSample = new HitSample(sample);
+				if (HitSample.TryParse(sampleLine, out var hitSample))
+				{
+					hit.HitSample = hitSample;
+				}
 			}
 			else
 			{
-				hit.HitSample = new HitSample("0:0:0:0:");
+				hit.HitSample = HitSample.Parse("0:0:0:0:");
 			}
 			
 			return true;
