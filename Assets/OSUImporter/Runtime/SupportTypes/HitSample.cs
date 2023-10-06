@@ -1,14 +1,16 @@
-﻿namespace HDyar.OSUImporter
+﻿using UnityEngine;
+
+namespace HDyar.OSUImporter
 {
 	[System.Serializable]
-	public struct HitSample
+	public class HitSample
 	{
 		public SampleSet NormalSet;
 		public SampleSet AdditionSet;
 		public int Index;
 		public int Volume;
 		public string Filename;//for now
-
+		public AudioClip Clip;
 		//we use a static factory everywhere else but a constructor here. I should change that to be consistent.
 		public HitSample(string source)
 		{
@@ -27,8 +29,15 @@
 			}
 			else
 			{
-				Filename = data[4];
+				Filename = data[^1];
 			}
+
+			Clip = null;
+		}
+
+		public void SetClip(AudioClip clip)
+		{
+			Clip = clip;
 		}
 	}
 }

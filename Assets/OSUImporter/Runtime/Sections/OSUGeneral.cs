@@ -8,6 +8,7 @@ namespace HDyar.OSUImporter
 	public class OSUGeneral : OSUSection
 	{
 		public string AudioFilename;
+		public AudioClip Clip;
 		public int AudioLeadIn = 0;
 		public string AudioHash;//deprecated
 		public int PreviewTime = -1;

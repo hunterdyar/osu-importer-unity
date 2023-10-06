@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HDyar.OSUImporter
 {
 	[Serializable]
-	public struct OSUHitObject
+	public class OSUHitObject
 	{
 		[HideInInspector]
 		public string Raw;
@@ -13,6 +13,8 @@ namespace HDyar.OSUImporter
 		public int Y;
 		public Vector2Int Position;
 		public int Time;
+
+		
 		public HitSound HitSound;
 		public bool HitCircle;
 		public bool Slider;
@@ -29,6 +31,8 @@ namespace HDyar.OSUImporter
 		public static bool TryParse(string line, out OSUHitObject hit)
 		{
 			//time,beatLength,meter,sampleSet,sampleIndex,volume,uninherited,effects
+			//483,192,1660,5,0,0:0:0:40:LR_CymbalCCR.wav
+
 			var data = line.Split(',');
 			hit = new OSUHitObject();
 			hit.Raw = line;
@@ -49,13 +53,22 @@ namespace HDyar.OSUImporter
 				return false;
 			}
 
-			if (int.TryParse(data[3], out var hitSoundInt))
+			hit.HitSound = HitSound.Normal;
+			if (int.TryParse(data[3], out var hs))
 			{
-				hit.HitSound = (HitSound)hitSoundInt;
+				if (hs == 0)
+				{
+					hit.HitSound = HitSound.Normal;
+				}
+				else
+				{
+					hit.HitSound = (OSUImporter.HitSound)hs;
+				}
+		
 			}
 			else
 			{
-				return false;
+				//return false;
 			}
 			
 			if (int.TryParse(data[4], out var t))

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -134,6 +135,40 @@ namespace HDyar.OSUImporter
 			//a section we don't support... yet?
 			parseSection = -1;
 			return null;
+		}
+
+		public string[] GetAllAudioClipFilenames()
+		{
+			//hashsets are garunteed unique, so we use this type to avoid "if includes" checks
+			HashSet<string> names = new HashSet<string> { General.AudioFilename };
+			foreach (OSUHitObject hitObject in HitObjects)
+			{
+				names.Add(hitObject.HitSample.Filename);
+			}
+
+			if (names.Contains(""))
+			{
+				names.Remove("");
+			}
+
+			return names.ToArray();
+		}
+
+		public void SetAudioClipsFromMap(Dictionary<string, AudioClip> map)
+		{
+			if(map.TryGetValue(General.AudioFilename,out var clip))
+			{
+				General.Clip = clip;
+			}
+
+			for (var i = 0; i < HitObjects.Length; i++)
+			{
+				var hit = HitObjects[i];
+				if (map.TryGetValue(hit.HitSample.Filename, out var hitclip))
+				{
+					hit.HitSample.SetClip(hitclip);
+				}
+			}
 		}
 	}
 }
