@@ -7,6 +7,8 @@ namespace HDyar.OSUImporter
 	[Serializable]
 	public struct OSUHitObject
 	{
+		[HideInInspector]
+		public string Raw;
 		public int X;
 		public int Y;
 		public Vector2Int Position;
@@ -29,7 +31,7 @@ namespace HDyar.OSUImporter
 			//time,beatLength,meter,sampleSet,sampleIndex,volume,uninherited,effects
 			var data = line.Split(',');
 			hit = new OSUHitObject();
-
+			hit.Raw = line;
 			if (!int.TryParse(data[0], out hit.X))
 			{
 				return false;
