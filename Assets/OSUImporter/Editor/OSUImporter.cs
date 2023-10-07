@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 
 namespace HDyar.OSUImporter
 {
-	[ScriptedImporter(1, new[] { "osu" })]
+	[ScriptedImporter(1, exts: new[] { "osu" }, importQueueOffset: 750)]
 	public class OSUImporter : ScriptedImporter
 	{
 		public bool useOverrides = false;
@@ -44,8 +44,12 @@ namespace HDyar.OSUImporter
 				{
 					assetFolder
 				};
+				
+				//get the filenames.
 				for (var i = 0; i < filenames.Length; i++)
 				{
+					
+					//setup our overrides.
 					string clipName = filenames[i];
 					clipName = Path.GetFileNameWithoutExtension(clipName);
 					sourceClipMapping[i].originalFilename = filenames[i];
@@ -80,6 +84,7 @@ namespace HDyar.OSUImporter
 				}
 
 				beatmap.SetAudioClipsFromMap(_map);
+				
 				
 				//for custom importers, I like having the raw text also available.
 				ctx.AddObjectToAsset(assetName + " body", rawtext);
