@@ -1,4 +1,4 @@
-# osu-importer-unity
+# osu! Importer for Unity
 Unity Importer for osu! rhythm game files.
 
 Currently a sample project as I hack it together. Will eventually make it a unity package you can install via git.
