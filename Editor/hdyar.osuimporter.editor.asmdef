@@ -1,0 +1,16 @@
+{
+    "name": "hdyar.osuimporter.editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:21f17aa433ef819448cc8a6e35ee9c24"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

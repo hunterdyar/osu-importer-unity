@@ -1,0 +1,23 @@
+﻿{
+  "name": "com.hdyar.osu-importer",
+  "version": "0.9.1",
+  "displayName": "osu! Importer",
+  "description": "Parse osu files from the bestest rhythm game",
+  "unity": "2022.1",
+  "documentationUrl": "https://github.com/hunterdyar/osu-importer-unity/",
+  "changelogUrl": "https://github.com/hunterdyar/osu-importer-unity/",
+  "license": "MIT",
+  "licensesUrl": "https://mit-license.org/",
+  "resolutionStrategy": "highest",
+  "keywords": [
+    "Importer",
+    "osu!",
+    "osu",
+    "Rhythm"
+  ],
+  "author": {
+    "name": "Hugh Dyar",
+    "email": "me@hdyar.com",
+    "url": "https://www.hdyar.com"
+  }
+}
