@@ -5,8 +5,9 @@ using UnityEditor;
 using UnityEditor.AssetImporters;
 using UnityEngine;
 using UnityEngine.Serialization;
+using HDyar.OSUImporter;
 
-namespace HDyar.OSUImporter
+namespace HDyar.OSUImporter.Editor
 {
 	[ScriptedImporter(1, exts: new[] { "osu" }, importQueueOffset: 750)]
 	public class OSUImporter : ScriptedImporter

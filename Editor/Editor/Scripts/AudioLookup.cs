@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace HDyar.OSUImporter
+namespace HDyar.OSUImporter.Editor
 {
 	[System.Serializable]
 	public struct AudioLookup
