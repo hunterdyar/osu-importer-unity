@@ -12,6 +12,7 @@ namespace HDyar.OSUImporter
 		public OSUEditor Editor;
 		public OSUMetadata Metadata;
 		public OSUDifficulty Difficulty;
+		[SerializeReference]
 		public OSUEvent[] Events;
 		public OSUTimingEvent[] TimingEvents;
 		public OSUHitObject[] HitObjects;
@@ -63,7 +64,8 @@ namespace HDyar.OSUImporter
 				}else if (parseSection == 1)
 				{
 					//parse events
-					if (OSUEvent.TryParse(line, out var e))
+					var e = OSUEvent.GetOSUEventFromLine(line);
+					if (e != null)
 					{
 						osuevents.Add(e);
 					}
