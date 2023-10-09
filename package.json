@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "displayName": "osu! Importer",
   "description": "Parse osu files from the bestest rhythm game",
-  "unity": "2022.1",
+  "unity": "2022.2",
   "documentationUrl": "https://github.com/hunterdyar/osu-importer-unity/",
   "changelogUrl": "https://github.com/hunterdyar/osu-importer-unity/releases",
   "license": "MIT",
