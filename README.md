@@ -11,6 +11,11 @@ here: https://osu.ppy.sh/wiki/en/Client/File_formats/osu_%28file_format%29
 This will parse the file into a readable OSUBeatmap with mostly 1-1 properties from the file format. 
 Where appropriate, the importer parses ints as booleans (ie:, a 0 or 1 int) or enums instead.
 
+## What are .osu files? Why not .osz?
+When you download a beatmap from [osu!](https://osu.ppy.sh/beatmapsets?sort=plays_desc), you download an "osz" file, which is just a .zip file. You can rename the extension to ".zip", and open it up ("extract" it) like any zip folder, to be a normal folder on your computer. This folder has the various audio files, and one or more .osu files, usually different difficulties.
+
+I wrote this to support developers who are interested in using osu beatmap [authoring tools](https://osu.ppy.sh/wiki/en/Client/Beatmap_editor) for making their own rhythm game. This does not support .osz, because this is an editor-time plugin and not focused on opening osz files during runtime.
+
 ## Install
 The easiest way to install is through the package manager through git.
 ### Install via Package Manager (Preferred)
