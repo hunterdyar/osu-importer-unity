@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Numerics;
+using System.Linq;
 using UnityEngine;
 
 namespace HDyar.OSUImporter
@@ -13,13 +13,13 @@ namespace HDyar.OSUImporter
 		public int Y;
 		public Vector2Int Position;
 		public int Time;
-
-		
+		public int EndTime = -1;
 		public HitSound HitSound;
 		public bool HitCircle;
 		public bool Slider;
 		public bool NewComboStart;
 		public bool Spinner;
+		public bool ManiaHold;
 		public HitSample HitSample;
 		/// <summary>
 		/// How many combo colours to skip. Only relevant if the object starts a new combo.
@@ -28,10 +28,18 @@ namespace HDyar.OSUImporter
 		public bool ManiaHoldNote;
 		public string[] ObjectParams;
 
+		public int ManiaColumn(int colCount = 7)
+		{
+			//todo: pass in mania columnCount or turn this into a utility function.
+			return Mathf.FloorToInt(X * colCount / 512f);
+		}
 		public static bool TryParse(string line, out OSUHitObject hit)
 		{
 			//time,beatLength,meter,sampleSet,sampleIndex,volume,uninherited,effects
 			//483,192,1660,5,0,0:0:0:40:LR_CymbalCCR.wav
+			
+			//128,192,28199,128,0,28745:1:0:0:100:
+
 
 			var data = line.Split(',');
 			hit = new OSUHitObject();
@@ -40,6 +48,8 @@ namespace HDyar.OSUImporter
 			{
 				return false;
 			}
+			
+		
 
 			if (!int.TryParse(data[1], out hit.Y))
 			{
@@ -91,10 +101,25 @@ namespace HDyar.OSUImporter
 				hit.ObjectParams = new string[par];
 				Array.Copy(data,5,hit.ObjectParams,0,par);
 			}
+			else
+			{
+				hit.ObjectParams = Array.Empty<string>();
+			}
 
 			var sampleLine = data[^1];
 			if (sampleLine.Contains(':'))
 			{
+				//are we a mania hold or regular?
+				if (sampleLine.Count(x => x == ':') == 5)
+				{
+					hit.ManiaHold = true;
+					var all = sampleLine.Split(':');
+					hit.EndTime = int.Parse(all[0]);
+					//cut this part out and parse the sample like normal.
+					sampleLine = sampleLine.Substring(sampleLine.IndexOf(':')+1);
+				}
+				
+				
 				if (HitSample.TryParse(sampleLine, out var hitSample))
 				{
 					hit.HitSample = hitSample;
@@ -105,6 +130,23 @@ namespace HDyar.OSUImporter
 				hit.HitSample = HitSample.Parse("0:0:0:0:");
 			}
 			
+			//
+
+			if (hit.ObjectParams.Length != 0)
+			{
+				//this is something different....
+				//128,192,28199,128,0,28745:1:0:0:100:
+
+			}
+			else
+			{
+				
+				//mania holds have same number of objectParams. We caught that already with the extra : above.
+				if (!hit.ManiaHold)
+				{
+					hit.HitCircle = true;
+				}
+			}
 			return true;
 		}
 	}

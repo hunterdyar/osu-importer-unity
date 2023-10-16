@@ -30,7 +30,6 @@ namespace HDyar.OSUImporter
 
 		public new static bool TryParse(string line, out OSUEvent e)
 		{
-			Debug.Log("Parsing a background");
 			var props = line.Split(',');
 			var b = new BackgroundEvent();
 			b.raw = line;
