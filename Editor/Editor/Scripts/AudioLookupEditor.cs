@@ -13,12 +13,21 @@ public class AudioLookupEditor : PropertyDrawer
 		var container = new VisualElement();
 
 		// Create property fields.
-		var filenameField = new PropertyField(property.FindPropertyRelative("originalFilename"));
-		var clipField = new PropertyField(property.FindPropertyRelative("clip"));
+		var f = property.FindPropertyRelative("originalFilename");
+		if (f != null)
+		{
+			var filenameField = new PropertyField();
+		}
+
+		var clip = property.FindPropertyRelative("clip");
+		if (clip != null)
+		{ 
+			var clipField = new PropertyField();
+			container.Add(clipField);
+		}
 
 		// Add fields to the container.
 		//container.Add(filenameField);
-		container.Add(clipField);
 
 		return container; 
 	}

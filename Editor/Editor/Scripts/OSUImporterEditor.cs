@@ -11,13 +11,20 @@ public class OSUImporterEditor : ScriptedImporterEditor
 	{
 		var importer = (OSUImporter)target;
 		var overrides = serializedObject.FindProperty("useOverrides");
-		EditorGUILayout.PropertyField(overrides);
-		SerializedProperty mapping;
+		if (overrides != null)
+		{
+			EditorGUILayout.PropertyField(overrides);
+		}
+		else
+		{
+			base.ApplyRevertGUI();
+			return;
+		}
+		SerializedProperty mapping = null;
 		if (!overrides.boolValue)
 		{
 			GUI.enabled = false;
 			mapping = serializedObject.FindProperty("sourceClipMapping");
-			
 		}
 		else
 		{
@@ -27,9 +34,12 @@ public class OSUImporterEditor : ScriptedImporterEditor
 		showFoldout = EditorGUILayout.Foldout(showFoldout,"Audio Clip Mappings");
 		if (showFoldout)
 		{
-			for (var i = 0; i < mapping.arraySize; i++)
+			if (mapping != null)
 			{
-				EditorGUILayout.PropertyField(mapping.GetArrayElementAtIndex(i));
+				for (var i = 0; i < mapping.arraySize; i++)
+				{
+					EditorGUILayout.PropertyField(mapping.GetArrayElementAtIndex(i));
+				}
 			}
 		}
 		
