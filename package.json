@@ -1,6 +1,6 @@
 ﻿{
   "name": "com.hdyar.osu-importer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "displayName": "osu! Importer",
   "description": "Parse osu files from the bestest rhythm game",
   "unity": "2022.2",
