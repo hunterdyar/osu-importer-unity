@@ -22,11 +22,11 @@ namespace HDyar.OSUImporter
 		/// How many combo colours to skip. Only relevant if the object starts a new combo.
 		/// </summary>
 		public int ColourHax;
-		public bool ManiaHoldNote;
-		public string[] ObjectParams;
+		
+		public string[] ObjectParams;//we would LIKE to deprecate this.
 		
 		//slider specific
-		public CurveType CurveType;
+		public CurveType CurveType = CurveType.NoCurve;
 		public Vector2Int[] CurvePoints;
 		public int Slides = -1;
 		public double Length = 0;
@@ -37,6 +37,9 @@ namespace HDyar.OSUImporter
 		public bool IsComboStart => (hitType & HitObjectType.ComboStart) != 0;
 		public bool IsSpinner => (hitType & HitObjectType.Spinner) != 0;
 		public bool IsSlider => (hitType & HitObjectType.Slider) != 0;
+		
+		public bool IsManiaHoldNote => (hitType & HitObjectType.ManiaHold) != 0;
+
 
 		public int ManiaColumn(int colCount = 7)
 		{
