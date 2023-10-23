@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using PlasticGui.EventTracking;
 using UnityEngine;
 
 namespace HDyar.OSUImporter
