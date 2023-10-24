@@ -19,7 +19,7 @@ namespace HDyar.OSUImporter
 		//handle default
 		public string[] eventParams;
 		
-		public new static bool TryParse(string line, out OSUEvent e)
+		public static bool TryParse(string line, out OSUEvent e)
 		{
 			var lines = line.Split(',');
 			e = new OSUEvent();
